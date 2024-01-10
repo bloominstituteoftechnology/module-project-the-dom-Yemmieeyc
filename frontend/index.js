@@ -1,5 +1,7 @@
 //const { adverbs, nouns } = require("./data")
 
+//const { ESLint } = require("eslint")
+
 function moduleProject1() {
   const footer = document.querySelector('footer')
   const currentYear = new Date().getFullYear()
@@ -71,6 +73,38 @@ function moduleProject1() {
 
   // 👉 TASK 5 - Build a "Friends" widget
   //  ✨ add your code here
+  const person = people[Math.floor(Math.random() * people.length)]
+  const personPara = document.createElement('p')
+  document.querySelector('.friends').appendChild(personPara)
+  const year = person.dateOfBirth.split('-') [0]
+  let sentencee = `${person.fname} ${person.lname} was born in ${year} and ` 
+  
+  if (!person.friends.length){
+    sentencee += 'has no friends.'
+  } else {
+    sentencee += 'is friends with '
+    for(let idx = 0; idx < person.friends.length; idx++){
+      const friendId = person.friends[idx]
+      const friend = people.find(p => p.id === friendId)
+      const fullName = `${friend.fname} ${friend.lname}`
+      console.log(fullName)
+      let isLastIdx = idx === person.friends.length-1
+      let isNextToLastIdx = idx === person.friends.length -2
+      if(isLastIdx){
+        sentencee += `${fullName}.`
+      }else if (isNextToLastIdx){
+        sentencee += `${fullName} and `
+      }else{
+        sentencee += `${fullName}, `
+      }
+    }
+  }
+  
+  personPara.textContent = sentencee
+  
+  console.log(person)
+
+  //is friends with ${}
 
   // 👉 TASK 6 - Make it so user can tab through the widgets
   //  ✨ add your code here
